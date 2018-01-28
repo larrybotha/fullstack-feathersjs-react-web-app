@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "homepage": "",
   "main": "api",
-  "keywords": [
-    "feathers"
-  ],
+  "keywords": ["feathers"],
   "author": {
     "name": "Larry Botha",
     "email": "larry@fixate.it"
@@ -25,6 +23,7 @@
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint api/. test/. --config .eslintrc.json",
     "start": "node api/",
+    "dev": "nodemon --inspect api/",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
