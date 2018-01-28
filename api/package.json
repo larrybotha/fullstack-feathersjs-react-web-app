@@ -1,0 +1,51 @@
+{
+  "name": "menu-monkey",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "api",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Larry Botha",
+    "email": "larry@fixate.it"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "api",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^8.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "eslint": "eslint api/. test/. --config .eslintrc.json",
+    "start": "node index.js",
+    "dev": "nodemon --inspect index.js",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^1.0.1",
+    "@feathersjs/errors": "^3.2.0",
+    "@feathersjs/express": "^1.1.2",
+    "@feathersjs/feathers": "^3.0.2",
+    "@feathersjs/socketio": "^3.0.1",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "feathers-nedb": "^3.0.0",
+    "helmet": "^3.9.0",
+    "nedb": "^1.8.0",
+    "serve-favicon": "^2.4.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "mocha": "^4.1.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
