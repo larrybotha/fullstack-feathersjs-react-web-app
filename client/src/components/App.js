@@ -1,7 +1,6 @@
 import {h, Component} from 'preact';
 import {Switch, Route} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux';
-import {connect} from 'react-redux';
 
 import {history} from '../store';
 import Home from './Home';
