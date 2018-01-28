@@ -4,7 +4,7 @@ const initialState = [];
 
 const recipesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.RECENT_RECIPES_REQUESTED:
+    case actions.RECENT_RECIPES_REQUEST:
       return state;
 
     case actions.RECENT_RECIPES_SUCCEEDED:

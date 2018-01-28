@@ -16,8 +16,7 @@ function* fetchRecentRecipes(feathersApp) {
 
 function* recentRecipesSaga(feathersApp) {
   yield* takeEvery(
-    // whenever this action is called...
-    actions.RECENT_RECIPES_REQUESTED,
+    actions.RECENT_RECIPES_REQUEST,
     // we call this function
     fetchRecentRecipes,
     feathersApp
