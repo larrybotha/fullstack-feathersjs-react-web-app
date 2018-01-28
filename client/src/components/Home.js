@@ -1,7 +1,24 @@
 import {h, Component} from 'preact';
+import {Divider} from 'semantic-ui-react';
 
-export default class Home extends Component {
-  render() {
-    return <div>home</div>;
-  }
-}
+import Main from './Main';
+import RecipeList from './RecipeList';
+
+const Home = () => {
+  return (
+    <Main
+      render={({requestRecentRecipes, recipes}) => (
+        <div>
+          <Divider />
+
+          <RecipeList
+            requestRecentRecipes={requestRecentRecipes}
+            recipes={recipes}
+          />
+        </div>
+      )}
+    />
+  );
+};
+
+export default Home;

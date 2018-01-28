@@ -1,14 +1,17 @@
 import {h, Component} from 'preact';
 import {Switch, Route} from 'react-router-dom';
+import {ConnectedRouter} from 'react-router-redux';
+import {connect} from 'react-redux';
 
+import {history} from '../store';
 import Home from './Home';
 
-export default class App extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route path="/" component={Home} />
-      </Switch>
-    );
-  }
-}
+const App = () => (
+  <ConnectedRouter history={history}>
+    <Switch>
+      <Route path="/" component={Home} />
+    </Switch>
+  </ConnectedRouter>
+);
+
+export default App;
