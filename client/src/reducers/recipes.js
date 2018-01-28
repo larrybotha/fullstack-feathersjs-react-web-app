@@ -8,7 +8,7 @@ const recipesReducer = (state = initialState, action) => {
       return state;
 
     case actions.RECENT_RECIPES_SUCCEEDED:
-      return {...state, recipes: action.recipes};
+      return [...state, ...action.recipes];
 
     default:
       return state;
