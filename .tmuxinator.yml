@@ -1,0 +1,16 @@
+name: feathersjs-react
+root: <%= Dir.pwd %>
+
+windows:
+- server:
+    root: <%= Dir.pwd %>/api
+    layout: even-horizontal
+    panes:
+    -
+    - npm run dev
+- client:
+    root: <%= Dir.pwd %>/client
+    layout: even-horizontal
+    panes:
+    -
+    - npm run dev
