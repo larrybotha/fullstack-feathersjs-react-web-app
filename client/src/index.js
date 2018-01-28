@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import App from './components/App';
 import store, {history} from './store';
 
-import './style';
+import 'semantic-ui-css/semantic.css';
 
 export default class extends Component {
   render() {
