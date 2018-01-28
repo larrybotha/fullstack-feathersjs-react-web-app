@@ -1,7 +1,9 @@
-const getRecentRecipes = app => {
-  const recipes = app.service('recipe');
+export const getRecentRecipes = app => {
+  // this is the service we'll be querying - recipe
+  const recipes = app.service('recipes');
 
-  return recipes.get().then((data, err) => data.data);
+  // we perform a get request on recipes
+  return recipes.find().then((data, err) => data.data);
   // return recipes
   //   .find({
   //     query: {$sort: {createdAt: -1}},
