@@ -8,13 +8,13 @@ export const getRecentRecipes = app => {
   // We use the name of the endpoint here - not the name of the service...?
   const recipes = app.service('recipes');
 
-  // we find all the items at this endpoint, and return th data
-  return recipes.find().then((data, err) => data.data);
-
-  // We'll query once we've got a db and the schemas in place
-  // return recipes
-  //   .find({
-  //     query: {$sort: {createdAt: -1}},
-  //   })
-  //   .then((data, err) => data.data);
+  // we find all the items at this endpoint, and return the data
+  return (
+    recipes
+      // instead of returning whatever we get from the server, we can request
+      // the server to sort the data before we receive it
+      // Sort the data from newest to oldest
+      .find({query: {$sort: {createdAt: -1}}})
+      .then((data, err) => data.data)
+  );
 };
