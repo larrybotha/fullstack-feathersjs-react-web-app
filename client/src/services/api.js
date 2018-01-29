@@ -9,7 +9,9 @@ export const getRecentRecipes = app => {
   const recipes = app.service('recipes');
 
   // we find all the items at this endpoint, and return th data
-  return recipes.find({$sort: {createdAt: 1}}).then((data, err) => data.data);
+  return recipes
+    .find({query: {$sort: {createdAt: 1}}})
+    .then((data, err) => data.data);
 
   // We'll query once we've got a db and the schemas in place
   // return recipes
