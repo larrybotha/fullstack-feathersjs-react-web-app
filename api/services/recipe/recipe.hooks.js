@@ -1,14 +1,14 @@
-
-
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create(context) {
+      context.data.createdAt = new Date().getTime();
+    },
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -18,7 +18,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -28,6 +28,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };
