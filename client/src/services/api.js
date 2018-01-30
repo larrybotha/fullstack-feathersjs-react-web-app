@@ -18,3 +18,17 @@ export const getRecentRecipes = app => {
       .then((data, err) => data.data)
   );
 };
+
+// this is what our addRecipe saga relies on in order to create a recipe on the
+// server.
+// We call this from our saga handler, passing through the details of the recipe.
+export const createRecipe = (app, recipe) => {
+  // first we need the service on which recipes reside
+  const recipes = app.service('recipes');
+
+  // then we can create the recipe. When this promise resolves, we dispatch
+  // our ADD_RECIPE_SUCCESS from the saga. If this promise was rejected, we'd have
+  // to catch the error in the saga, and dispatch an action to indicate to the UI
+  // that there was an error.
+  return recipes.create(recipe).then((data, err) => data);
+};
