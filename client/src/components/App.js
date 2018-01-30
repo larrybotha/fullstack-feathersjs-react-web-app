@@ -3,12 +3,14 @@ import {Switch, Route} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux';
 
 import {history} from '../store';
-import Home from './Home';
+import Home from './routes/Home';
+import RecipesAdd from './routes/RecipesAdd';
 
 const App = () => (
   <ConnectedRouter history={history}>
     <Switch>
-      <Route path="/" component={Home} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/recipes/add" component={RecipesAdd} />
     </Switch>
   </ConnectedRouter>
 );

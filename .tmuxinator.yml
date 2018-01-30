@@ -11,7 +11,8 @@ windows:
     -
 - client:
     root: <%= Dir.pwd %>/client
-    layout: even-horizontal
+    layout: 9fd1,181x38,0,0{90x38,0,0,0,90x38,91,0[90x19,91,0,2,90x18,91,20,4]}
     panes:
-    -
+    - vim
     - npm run dev
+    -

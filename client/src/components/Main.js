@@ -11,16 +11,16 @@ const Main = ({render, ...restProps}) => (
   <Container>
     <Header as="h1" textAlign="center">
       <Link to="/">Menu monkey</Link>
-
-      {render({...restProps})}
     </Header>
+
+    {render({...restProps})}
   </Container>
 );
 
 // get the recipes from state.
 // By default recipes is an empty array. Once we make a request for the recipes
 // we update state in the reducer, and the recipes are then available in the store
-const mapStateToProps = ({recipes}) => ({recipes});
+const mapStateToProps = ({recipes}) => ({recipes: recipes.recipes});
 
 // These are all the actions available via our recipe actions. The only one we
 // care about in the UI is requestRecentRecipes. We fire that to get the recipes
