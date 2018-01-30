@@ -1,8 +1,8 @@
 import {h, Component} from 'preact';
 import {Divider} from 'semantic-ui-react';
 
-import Main from './Main';
-import RecipeList from './RecipeList';
+import Main from '../Main';
+import RecipeList from '../RecipeList';
 
 const Home = () => {
   return (
