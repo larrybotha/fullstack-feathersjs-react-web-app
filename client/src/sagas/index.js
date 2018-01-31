@@ -3,7 +3,7 @@ import {fork, call, put} from 'redux-saga/effects';
 
 import {history} from '../store';
 
-import {createRecipe, getRecentRecipes} from '../services/api';
+import {createRecipe, getRecipe, getRecentRecipes} from '../services/api';
 import * as actions from '../actions/recipes';
 
 // This function is called from recentRecipesSaga when the
@@ -77,6 +77,30 @@ function* addRecipeSaga(feathersApp) {
   yield* takeEvery(actions.ADD_RECIPE, addRecipe, feathersApp);
 }
 
+// this is the handler for our fetchRecipeSaga
+// From the action we get the action object containing the id of the recipe we
+// want to fetch
+function* fetchRecipe(feathersApp, {id}) {
+  // make a request to the API to get a specific recipe by id
+  const res = yield call(getRecipe, feathersApp, id);
+
+  // now we dispatch FETCH_RECIPE_SUCCESS so that our reducer and add the response
+  // to our store
+  // This is currently in the recipes reducer, but we would benefit from moving
+  // this to its i=own reducer, along with createRecipe
+
+  // This is an action creator! This should not be here - we should be importing
+  // these from the action file, so that it's all consistent!
+  yield put({type: actions.FETCH_RECIPE_SUCCESS, recipe: res});
+}
+
+// create a saga for fetching a single recipe
+function* fetchRecipeSaga(feathersApp) {
+  // listen for anyone dispatching the FETCH_RECIPE action, and trigger
+  // fetchRecipe when that happens
+  yield* takeEvery(actions.FETCH_RECIPE, fetchRecipe, feathersApp);
+}
+
 // our root saga.
 // It receives the application against which we will be making requests
 function* root(feathersApp) {
@@ -87,6 +111,7 @@ function* root(feathersApp) {
   yield [
     fork(recentRecipesSaga, feathersApp),
     fork(addRecipeSaga, feathersApp),
+    fork(fetchRecipeSaga, feathersApp),
   ];
 }
 
