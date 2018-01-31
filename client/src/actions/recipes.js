@@ -4,12 +4,12 @@ export const requestRecentRecipes = () => ({
   type: RECENT_RECIPES_REQUEST,
 });
 
-export const RECENT_RECIPES_SUCCESS = '@recipes/RECENT_RECIPES_SUCCESS';
 // when we have a success response after requesting recipes.
-// This is fired inside the recipes saga on a successful response
-export const recentRecipesSucceeded = () => ({
-  type: RECENT_RECIPES_SUCCESS,
-});
+// This action is dispatched inside the recipes saga on a successful response
+export const RECENT_RECIPES_SUCCESS = '@recipes/RECENT_RECIPES_SUCCESS';
+// export const recentRecipesSucceeded = () => ({
+//   type: RECENT_RECIPES_SUCCESS,
+// });
 
 // this is the action we dispatch from the view with the data we want to create
 // a new recipe with.
@@ -35,3 +35,18 @@ export const ADD_RECIPE_SUCCESS = '@recipes/ADD_SUCCESS';
 // export const addRecipeSucess = () => ({
 //   type: ADD_RECIPE_SUCCESS,
 // });
+
+// we dispatch this action from the single recipe view to get the recipe from the
+// server.
+// Our saga is subscribed to this action, and receives the id which is passes to
+// the API integration function which makes the actual request.
+export const FETCH_RECIPE = '@recipes/FETCH_RECIPE';
+export const fetchRecipe = id => ({
+  type: FETCH_RECIPE,
+  id,
+});
+
+// once the API returns successfully, the saga dispatches an action with this type.
+// Omg - the action creation creators are not here because they're being written
+// directly in the saga!
+export const FETCH_RECIPE_SUCCESS = '@recipes/FETCH_RECIPE_SUCCESS';

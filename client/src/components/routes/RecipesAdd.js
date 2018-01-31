@@ -1,21 +1,8 @@
 import {h, Component} from 'preact';
-import {Divider} from 'semantic-ui-react';
 
 import Main from '../Main';
 import AddRecipe from '../AddRecipe';
 
-const Home = () => {
-  return (
-    <Main
-      render={() => (
-        <div>
-          <Divider />
+const RecipesAdd = () => <Main render={() => <AddRecipe />} />;
 
-          <AddRecipe />
-        </div>
-      )}
-    />
-  );
-};
-
-export default Home;
+export default RecipesAdd;

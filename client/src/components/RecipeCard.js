@@ -1,4 +1,5 @@
 import {h} from 'preact';
+import {Link} from 'react-router-dom';
 import {Card, Image} from 'semantic-ui-react';
 
 const RecipeCard = ({recipe}) => (
@@ -13,7 +14,9 @@ const RecipeCard = ({recipe}) => (
       <Card.Meta>Description</Card.Meta>
       <Card.Description>{recipe.description}</Card.Description>
 
-      {recipe.ingredients}
+      <div>{recipe.ingredients.join(', ')}</div>
+
+      <Link to={`/recipes/${recipe._id}`}>view recipe</Link>
     </Card.Content>
   </Card>
 );

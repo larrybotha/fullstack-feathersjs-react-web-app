@@ -32,3 +32,13 @@ export const createRecipe = (app, recipe) => {
   // that there was an error.
   return recipes.create(recipe).then((data, err) => data);
 };
+
+// create an endpoint to fetch a single recipe by its id
+export const getRecipe = (app, id) => {
+  // first get the service we are using for the request
+  const recipes = app.service('recipes');
+
+  // make the request and return the promise. Our saga has a yield waiting for
+  // a response.
+  return recipes.get(id).then((data, err) => data);
+};

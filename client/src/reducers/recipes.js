@@ -3,7 +3,8 @@ import * as actions from '../actions/recipes';
 // not great, but it'll do for now to leave recipes directly on the state.
 // Should probably add them to an 'item's prop
 const initialState = {
-  recipes: [],
+  items: [],
+  currentRecipe: undefined,
 };
 
 const recipesReducer = (state = initialState, action) => {
@@ -11,7 +12,12 @@ const recipesReducer = (state = initialState, action) => {
     // the saga dispatches this action when it gets a success. At the moment
     // there's no failure handler in there.
     case actions.RECENT_RECIPES_SUCCESS:
-      return {...state, recipes: action.recipes};
+      return {...state, items: action.recipes};
+
+    // This action is dispatched via a saga once the API returns a single recipe
+    // We should probably have a separate reducer for individual recipes
+    case actions.FETCH_RECIPE_SUCCESS:
+      return {...state, currentRecipe: action.recipe};
 
     // we don't need to do anything when this action is fired for now.
     // We could set a loading state
