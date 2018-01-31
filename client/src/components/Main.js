@@ -2,7 +2,7 @@ import {h, Component} from 'preact';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {Header, Container} from 'semantic-ui-react';
+import {Divider, Header, Container} from 'semantic-ui-react';
 import * as actions from '../actions/recipes';
 
 // this is the main layout component that wraps routes
@@ -13,6 +13,8 @@ const Main = ({render, ...restProps}) => (
       <Link to="/">Menu monkey</Link>
     </Header>
 
+    <Divider />
+
     {render({...restProps})}
   </Container>
 );
@@ -20,7 +22,7 @@ const Main = ({render, ...restProps}) => (
 // get the recipes from state.
 // By default recipes is an empty array. Once we make a request for the recipes
 // we update state in the reducer, and the recipes are then available in the store
-const mapStateToProps = ({recipes}) => ({recipes: recipes.recipes});
+const mapStateToProps = ({recipes}) => ({recipes: recipes.items});
 
 // These are all the actions available via our recipe actions. The only one we
 // care about in the UI is requestRecentRecipes. We fire that to get the recipes
