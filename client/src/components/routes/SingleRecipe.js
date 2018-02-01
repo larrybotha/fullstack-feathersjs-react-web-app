@@ -15,9 +15,13 @@ class SingleRecipe extends Component {
   state = {uiState: uiStates.PENDING};
 
   componentWillMount() {
-    const {fetchRecipe, match} = this.props;
+    const {fetchRecipe, match, recipe} = this.props;
 
-    fetchRecipe(match.params.id);
+    if (!recipe) {
+      fetchRecipe(match.params.id);
+    } else {
+      this.setState({uiState: uiStates.SUCCESS});
+    }
   }
 
   componentWillReceiveProps(nextProps) {
