@@ -7,6 +7,7 @@ import Home from './routes/Home';
 import RecipesAdd from './routes/RecipesAdd';
 import SingleRecipe from './routes/SingleRecipe';
 import Signup from './routes/Signup';
+import Login from './routes/Login';
 
 const App = () => (
   <ConnectedRouter history={history}>
@@ -16,6 +17,7 @@ const App = () => (
       <Route exact path="/recipes/add" component={RecipesAdd} />
       <Route exact path="/recipes/:id" component={SingleRecipe} />
       <Route exact path="/signup" component={Signup} />
+      <Route exact path="/login" component={Login} />
     </Switch>
   </ConnectedRouter>
 );
