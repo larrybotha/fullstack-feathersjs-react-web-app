@@ -1,7 +1,7 @@
 import {takeEvery} from 'redux-saga';
 import {call, put} from 'redux-saga/effects';
 
-import {createRecipe, getRecipe, getRecentRecipes} from '../services/api';
+import {createRecipe, getRecipe, getRecentRecipes} from '../services/recipes';
 import * as actions from '../actions/recipes';
 
 import {history} from '../store';
