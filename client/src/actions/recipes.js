@@ -7,9 +7,10 @@ export const requestRecentRecipes = () => ({
 // when we have a success response after requesting recipes.
 // This action is dispatched inside the recipes saga on a successful response
 export const RECENT_RECIPES_SUCCESS = '@recipes/RECENT_RECIPES_SUCCESS';
-// export const recentRecipesSucceeded = () => ({
-//   type: RECENT_RECIPES_SUCCESS,
-// });
+export const recentRecipesSuccess = recipes => ({
+  type: RECENT_RECIPES_SUCCESS,
+  recipes,
+});
 
 // this is the action we dispatch from the view with the data we want to create
 // a new recipe with.
@@ -28,13 +29,12 @@ export const addRecipe = ({name, ingredients, description, imageUrl}) => ({
   imageUrl,
 });
 
-// this is the action we can dispatch. We don't need the function, because we're not
-// dispatching this from a view. We dispatch the action via our saga once our
-// recipe is successfully created.
+// this is the action we can dispatch.
+// The function is called from within our saga when we get a response
 export const ADD_RECIPE_SUCCESS = '@recipes/ADD_SUCCESS';
-// export const addRecipeSucess = () => ({
-//   type: ADD_RECIPE_SUCCESS,
-// });
+export const addRecipeSuccess = () => ({
+  type: ADD_RECIPE_SUCCESS,
+});
 
 // we dispatch this action from the single recipe view to get the recipe from the
 // server.
@@ -46,7 +46,10 @@ export const fetchRecipe = id => ({
   id,
 });
 
-// once the API returns successfully, the saga dispatches an action with this type.
-// Omg - the action creation creators are not here because they're being written
-// directly in the saga!
+// once the API returns successfully the saga executes the function here, allowing
+// us to handle the response from the API
 export const FETCH_RECIPE_SUCCESS = '@recipes/FETCH_RECIPE_SUCCESS';
+export const fetchRecipeSuccess = recipe => ({
+  type: FETCH_RECIPE_SUCCESS,
+  recipe,
+});

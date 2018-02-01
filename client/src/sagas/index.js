@@ -23,7 +23,7 @@ function* fetchRecentRecipes(feathersApp) {
   // Why do we use put here? Is this related to REST? Surely not - we have call
   // and fork.
   // Again... need to do a redux-saga course.
-  yield put({type: actions.RECENT_RECIPES_SUCCESS, recipes});
+  yield put(actions.recentRecipesSuccess(recipes));
 }
 
 // this is a saga - something that listens to actions being dispatched so we can
@@ -61,10 +61,10 @@ function* addRecipe(feathersApp, {name, ingredients, description, imageUrl}) {
     imageUrl,
   });
 
-  // once we get that response we can do anything with it. We can dispatch an
+  // once we get that response it's up to us what to do with it. We can dispatch an
   // action and handle it in our reducer if need be - say append the recipe to
   // the existing recipes.
-  yield put({type: actions.ADD_RECIPE_SUCCESS, response});
+  yield put(actions.addRecipeSuccess());
   // once that is done, navigate the user to the home page
   yield history.push('/');
 }
@@ -82,16 +82,14 @@ function* addRecipeSaga(feathersApp) {
 // want to fetch
 function* fetchRecipe(feathersApp, {id}) {
   // make a request to the API to get a specific recipe by id
-  const res = yield call(getRecipe, feathersApp, id);
+  const recipe = yield call(getRecipe, feathersApp, id);
 
   // now we dispatch FETCH_RECIPE_SUCCESS so that our reducer and add the response
   // to our store
   // This is currently in the recipes reducer, but we would benefit from moving
   // this to its i=own reducer, along with createRecipe
 
-  // This is an action creator! This should not be here - we should be importing
-  // these from the action file, so that it's all consistent!
-  yield put({type: actions.FETCH_RECIPE_SUCCESS, recipe: res});
+  yield put(actions.fetchRecipeSuccess(recipe));
 }
 
 // create a saga for fetching a single recipe
