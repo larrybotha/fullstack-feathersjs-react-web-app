@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 import createApp from './services';
@@ -15,7 +15,12 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   defaultStore,
-  applyMiddleware(sagaMiddleware)
+  compose(
+    applyMiddleware(sagaMiddleware),
+    process.env.NODE_ENV === 'development' && window.devToolsExtension
+      ? window.devToolsExtension()
+      : f => f
+  )
 );
 
 const app = createApp();
