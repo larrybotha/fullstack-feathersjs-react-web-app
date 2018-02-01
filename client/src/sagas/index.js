@@ -1,6 +1,7 @@
 import {fork} from 'redux-saga/effects';
 
 import * as recipesSagas from './recipes';
+import * as userSagas from './user';
 
 // our root saga.
 // It receives the application against which we will be making requests
@@ -13,6 +14,8 @@ function* root(feathersApp) {
     fork(recipesSagas.recentRecipesSaga, feathersApp),
     fork(recipesSagas.addRecipeSaga, feathersApp),
     fork(recipesSagas.fetchRecipeSaga, feathersApp),
+
+    fork(userSagas.addUserSaga, feathersApp),
   ];
 }
 
