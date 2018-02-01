@@ -2,7 +2,7 @@ import {h, Component} from 'preact';
 import {connect} from 'react-redux';
 import {Button, Form, Message} from 'semantic-ui-react';
 
-import * as actions from '../../actions/user';
+import {addUser} from '../../actions/user';
 
 class SignupForm extends Component {
   static initialState = {
@@ -27,7 +27,7 @@ class SignupForm extends Component {
       username,
       password,
     });
-    this.setState(initialState);
+    this.setState(this.initialState);
   };
 
   render() {
@@ -61,7 +61,7 @@ class SignupForm extends Component {
 }
 
 const mapDispatchToProps = {
-  adduser: actions.addUser,
+  addUser
 };
 
 export default connect(null, mapDispatchToProps)(SignupForm);
