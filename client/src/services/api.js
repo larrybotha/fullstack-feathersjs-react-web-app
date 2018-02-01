@@ -42,3 +42,9 @@ export const getRecipe = (app, id) => {
   // a response.
   return recipes.get(id).then((data, err) => data);
 };
+
+export const createUser = (app, {username, password}) => {
+  const users = app.service('users');
+
+  return users.create({email: username, password}).then((data, err) => data);
+};
