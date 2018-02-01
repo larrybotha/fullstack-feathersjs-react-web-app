@@ -42,4 +42,3 @@ export const getRecipe = (app, id) => {
   // a response.
   return recipes.get(id).then((data, err) => data);
 };
-
