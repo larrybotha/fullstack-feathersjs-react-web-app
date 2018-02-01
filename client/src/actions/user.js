@@ -6,7 +6,7 @@ export const addUser = ({username, password}) => ({
 });
 
 export const USER_ADD_SUCCESS = '@user/ADD_SUCCESS';
-export const userAddSuccess = (username = {
+export const addUserSuccess = username => ({
   type: USER_ADD_SUCCESS,
   username,
 });
