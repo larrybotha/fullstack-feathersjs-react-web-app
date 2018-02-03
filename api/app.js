@@ -17,6 +17,8 @@ const channels = require('./channels');
 
 const app = express(feathers());
 
+const authentication = require('./authentication');
+
 // Load app configuration
 app
   .configure(configuration())
@@ -42,6 +44,8 @@ app
 
   // Configure other middleware (see `middleware/index.js`)
   .configure(middleware)
+  // this needs to be done before any services are registered... why is that?
+  .configure(authentication)
   // Set up our services (see `services/index.js`)
   .configure(services)
   // Set up event channels (see channels.js)
