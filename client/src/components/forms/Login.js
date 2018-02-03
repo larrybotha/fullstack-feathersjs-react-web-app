@@ -19,15 +19,14 @@ class LoginForm extends Component {
   };
 
   handleSubmit = e => {
-    const {addUser} = this.props;
+    const {login} = this.props;
     const {email, password} = this.state;
     e.preventDefault();
 
-    addUser({
+    login({
       email,
       password,
     });
-    this.setState(initialState);
   };
 
   render() {
@@ -36,7 +35,7 @@ class LoginForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
-          <label>Username</label>
+          <label>Email</label>
           <input
             name="email"
             defaultValue={email}
@@ -61,7 +60,7 @@ class LoginForm extends Component {
 }
 
 const mapDispatchToProps = {
-  adduser: actions.addUser,
+  login: actions.login,
 };
 
 export default connect(null, mapDispatchToProps)(LoginForm);

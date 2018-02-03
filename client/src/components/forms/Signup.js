@@ -36,7 +36,7 @@ class SignupForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
-          <label>Username</label>
+          <label>Email</label>
           <input
             name="email"
             defaultValue={email}
