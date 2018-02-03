@@ -6,9 +6,10 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.USER_ADD_SUCCESS:
-      return {...state, currentUser: action.username};
+    case actions.USER_LOGIN_SUCCESS:
+      return {...state, ...action.currentUser};
 
+    case actions.USER_ADD_SUCCESS:
     default:
       return state;
   }

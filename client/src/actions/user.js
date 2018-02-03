@@ -1,12 +1,37 @@
-export const USER_ADD = '@user/ADD';
-export const addUser = ({username, password}) => ({
-  type: USER_ADD,
-  username,
+export const USER_ADD_REQUEST = '@user/ADD_REQUEST';
+export const addUser = ({email, password}) => ({
+  type: USER_ADD_REQUEST,
+  email,
   password,
 });
 
 export const USER_ADD_SUCCESS = '@user/ADD_SUCCESS';
-export const addUserSuccess = username => ({
+export const addUserSuccess = email => ({
   type: USER_ADD_SUCCESS,
-  username,
+  email,
+});
+
+// create action for requesting a log in
+export const USER_LOGIN_REQUEST = '@user/LOGIN_REQUEST';
+// The data passed in here comes from the action dispatched via the form.
+// In users saga we subscribe to this action, and fire the request against
+// the API from there
+export const login = ({email, password}) => ({
+  type: USER_LOGIN_REQUEST,
+  email,
+  password,
+});
+
+// If the API request fired from the saga succeeds, we pass the current user
+// to our reducer
+export const USER_LOGIN_SUCCESS = '@user/LOGIN_SUCCESS';
+export const loginSuccess = currentUser => ({
+  type: USER_LOGIN_SUCCESS,
+  currentUser,
+});
+
+// otherwise we dispatch the fail action
+export const USER_LOGIN_FAIL = '@user/LOGIN_FAIL';
+export const loginFailure = () => ({
+  type: USER_LOGIN_FAIL,
 });

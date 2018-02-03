@@ -1,7 +1,7 @@
 // our createUser service which is called by our addUser saga handler, and which
-// passes through the username and password that the server will use to create a
+// passes through the email and password that the server will use to create a
 // user for us.
-export const createUser = (app, {username, password}) => {
+export const createUser = (app, {email, password}) => {
   // get the users service
   const users = app.service('users');
 
@@ -11,5 +11,27 @@ export const createUser = (app, {username, password}) => {
   // What happens if the promise fails?
   // Do we catch that in the saga?
   // Surely we don't handle that here
-  return users.create({email: username, password}).then((data, err) => data);
+  return users.create({email, password}).then((data, err) => data);
+};
+
+// the integration with our server. We receive the data sent via our saga handler
+export const login = (app, {email, password}) => {
+  // and use app.authenticate, using localstorage to store the returned key,
+  // and pass through the details the user entered in the form
+  return (
+    app
+      .authenticate({
+        strategy: 'local',
+        email,
+        password,
+      })
+      // if it resolves, we return the data from the server
+      .then(data => data)
+      // if it is rejected, send back an empty object that we can use to
+      // determine if the request was a success or failure
+      .catch(err => {
+        console.log(err);
+        return {};
+      })
+  );
 };

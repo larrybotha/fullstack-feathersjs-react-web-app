@@ -16,6 +16,7 @@ function* root(feathersApp) {
     fork(recipesSagas.fetchRecipeSaga, feathersApp),
 
     fork(userSagas.addUserSaga, feathersApp),
+    fork(userSagas.loginUserSaga, feathersApp),
   ];
 }
 
