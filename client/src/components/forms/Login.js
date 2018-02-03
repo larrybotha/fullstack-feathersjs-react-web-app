@@ -6,7 +6,7 @@ import * as actions from '../../actions/user';
 
 class LoginForm extends Component {
   static initialState = {
-    username: '',
+    email: '',
     password: '',
   };
 
@@ -20,26 +20,26 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     const {addUser} = this.props;
-    const {username, password} = this.state;
+    const {email, password} = this.state;
     e.preventDefault();
 
     addUser({
-      username,
+      email,
       password,
     });
     this.setState(initialState);
   };
 
   render() {
-    const {username, password} = this.state;
+    const {email, password} = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username</label>
           <input
-            name="username"
-            defaultValue={username}
+            name="email"
+            defaultValue={email}
             onChange={this.handleChange}
           />
         </Form.Field>

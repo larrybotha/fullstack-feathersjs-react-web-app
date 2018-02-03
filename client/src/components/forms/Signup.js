@@ -6,7 +6,7 @@ import {addUser} from '../../actions/user';
 
 class SignupForm extends Component {
   static initialState = {
-    username: '',
+    email: '',
     password: '',
   };
 
@@ -20,26 +20,26 @@ class SignupForm extends Component {
 
   handleSubmit = e => {
     const {addUser} = this.props;
-    const {username, password} = this.state;
+    const {email, password} = this.state;
     e.preventDefault();
 
     addUser({
-      username,
+      email,
       password,
     });
     this.setState(this.initialState);
   };
 
   render() {
-    const {username, password} = this.state;
+    const {email, password} = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username</label>
           <input
-            name="username"
-            defaultValue={username}
+            name="email"
+            defaultValue={email}
             onChange={this.handleChange}
           />
         </Form.Field>
@@ -61,7 +61,7 @@ class SignupForm extends Component {
 }
 
 const mapDispatchToProps = {
-  addUser
+  addUser,
 };
 
 export default connect(null, mapDispatchToProps)(SignupForm);

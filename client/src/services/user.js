@@ -1,7 +1,7 @@
 // our createUser service which is called by our addUser saga handler, and which
-// passes through the username and password that the server will use to create a
+// passes through the email and password that the server will use to create a
 // user for us.
-export const createUser = (app, {username, password}) => {
+export const createUser = (app, {email, password}) => {
   // get the users service
   const users = app.service('users');
 
@@ -11,5 +11,5 @@ export const createUser = (app, {username, password}) => {
   // What happens if the promise fails?
   // Do we catch that in the saga?
   // Surely we don't handle that here
-  return users.create({email: username, password}).then((data, err) => data);
+  return users.create({email: email, password}).then((data, err) => data);
 };

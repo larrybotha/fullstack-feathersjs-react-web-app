@@ -7,7 +7,7 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.USER_ADD_SUCCESS:
-      return {...state, currentUser: action.username};
+    // return {...state, currentUser: action.email};
 
     default:
       return state;
