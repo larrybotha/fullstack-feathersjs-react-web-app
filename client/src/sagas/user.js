@@ -4,7 +4,7 @@ import {call, put} from 'redux-saga/effects';
 import {history} from '../store';
 
 import * as actions from '../actions/user';
-import {createUser} from '../services/user';
+import {createUser, login} from '../services/user';
 
 // the generator we call that makes fires the function that makes the request
 // to our users service
@@ -35,4 +35,32 @@ export const addUserSaga = function* addUserSaga(feathersApp) {
   // So in addUser, we have multiple yields. We need this generator to yield
   // everything that the other generator yields.
   yield* takeEvery(actions.USER_ADD_REQUEST, addUser, feathersApp);
+};
+
+// attempt to log a user in. This is the handler for our loginSaga
+// This handler receives the data in the dispatched action on the log in form
+const tryLogin = function* tryLogin(feathersApp, {email, password}) {
+  // we store the user we get in the response from making a request against
+  // our API
+  const {user} = yield call(login, feathersApp, {email, password});
+
+  // if we have a use
+  if (user) {
+    // dispatch the loginSuccess action, sending through the user data returned
+    yield put(actions.loginSuccess({currentUser: user}));
+
+    // and then redirect the user to the home
+    yield history.push('/');
+  } else {
+    // otherwise dispatch loginFailure
+    yield put(actions.loginFailure());
+  }
+};
+
+// this is the loginSaga
+export const loginUserSaga = function* loginUserSaga(feathersApp) {
+  // that is subscribed to USER_LOGIN_REQUEST
+  // The tryLogin handler is fired after this, which receives the data from the
+  // originally dispatched action
+  yield* takeEvery(actions.USER_LOGIN_REQUEST, tryLogin, feathersApp);
 };
