@@ -9,15 +9,17 @@ import SingleRecipe from './routes/SingleRecipe';
 import Signup from './routes/Signup';
 import Login from './routes/Login';
 
+import routes from '../routes';
+
 const App = () => (
   <ConnectedRouter history={history}>
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Redirect exact from="/recipes" to="/" />
-      <Route exact path="/recipes/add" component={RecipesAdd} />
-      <Route exact path="/recipes/:id" component={SingleRecipe} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path={routes.home} component={Home} />
+      <Redirect exact from={routes.recipes} to={routes.home} />
+      <Route exact path={routes.recipesAdd} component={RecipesAdd} />
+      <Route exact path={routes.recipeItem} component={SingleRecipe} />
+      <Route exact path={routes.signup} component={Signup} />
+      <Route exact path={routes.login} component={Login} />
     </Switch>
   </ConnectedRouter>
 );
