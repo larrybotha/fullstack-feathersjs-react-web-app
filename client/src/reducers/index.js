@@ -2,11 +2,11 @@ import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 
 import recipesReducer from './recipes';
-import userReducer from './user';
+import currentUserReducer from './currentUser';
 
 const reducer = combineReducers({
+  currentUser: currentUserReducer,
   recipes: recipesReducer,
-  user: userReducer,
   router: routerReducer,
 });
 

@@ -2,7 +2,7 @@ import {h, Component} from 'preact';
 import {connect} from 'react-redux';
 import {Button, Form, Message} from 'semantic-ui-react';
 
-import {addUser} from '../../actions/user';
+import {addUser} from '../../actions/currentUser';
 
 class SignupForm extends Component {
   static initialState = {
