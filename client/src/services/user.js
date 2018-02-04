@@ -26,12 +26,22 @@ export const login = (app, {email, password}) => {
         password,
       })
       // if it resolves, we return the data from the server
-      .then(data => data)
+      .then(data => {
+        return data;
+      })
       // if it is rejected, send back an empty object that we can use to
       // determine if the request was a success or failure
       .catch(err => {
         console.log(err);
-        return {};
+        // return the full error here so we can get better feedback on what's going
+        // on when the server to log in
+        return err;
       })
   );
+};
+
+// create the integration for logging a user out
+export const logout = app => {
+  // all we need to do is return the promise from app.logout
+  return app.logout().then(data => data);
 };

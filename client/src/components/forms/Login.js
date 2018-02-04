@@ -2,7 +2,7 @@ import {h, Component} from 'preact';
 import {connect} from 'react-redux';
 import {Button, Form, Message} from 'semantic-ui-react';
 
-import * as actions from '../../actions/user';
+import * as actions from '../../actions/currentUser';
 
 class LoginForm extends Component {
   static initialState = {

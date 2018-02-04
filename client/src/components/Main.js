@@ -5,12 +5,14 @@ import {connect} from 'react-redux';
 import {Divider, Header, Container} from 'semantic-ui-react';
 import * as actions from '../actions/recipes';
 
+import NavBar from './NavBar';
+
 // this is the main layout component that wraps routes
 // Overkill, but we're passing all state down to whatever component is a child
 const Main = ({render, ...restProps}) => (
   <Container>
     <Header as="h1" textAlign="center">
-      <Link to="/">Menu monkey</Link>
+      <NavBar />
     </Header>
 
     <Divider />

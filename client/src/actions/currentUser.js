@@ -27,11 +27,21 @@ export const login = ({email, password}) => ({
 export const USER_LOGIN_SUCCESS = '@user/LOGIN_SUCCESS';
 export const loginSuccess = currentUser => ({
   type: USER_LOGIN_SUCCESS,
-  currentUser,
+  ...currentUser,
 });
 
 // otherwise we dispatch the fail action
 export const USER_LOGIN_FAIL = '@user/LOGIN_FAIL';
 export const loginFailure = () => ({
   type: USER_LOGIN_FAIL,
+});
+
+export const USER_LOGOUT_REQUEST = '@user/LOGOUT_REQUEST';
+export const logout = () => ({
+  type: USER_LOGOUT_REQUEST,
+});
+
+export const USER_LOGOUT_SUCCESS = '@user/LOGOUT_SUCCESS';
+export const logoutSuccess = () => ({
+  type: USER_LOGOUT_SUCCESS,
 });
