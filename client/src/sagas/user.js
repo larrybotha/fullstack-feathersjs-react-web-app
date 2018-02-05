@@ -91,3 +91,14 @@ export const logoutUserSaga = function* logoutUserSaga(feathersApp) {
   // action was dispatched with, if anything
   yield* takeEvery(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
 };
+
+const authUserRequest = function* authUserRequest(feathersApp) {
+  const response = yield call(userService.authUser, feathersApp);
+
+  debugger;
+  yield put(actions.authUserSuccess(), {currentUser: response});
+};
+
+export const authUserSaga = function* authUserSaga(feathersApp) {
+  yield* takeEvery(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
+};

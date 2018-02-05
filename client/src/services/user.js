@@ -29,6 +29,7 @@ export const login = (app, {email, password}) => {
       .then(data => {
         return data;
       })
+
       // if it is rejected, send back an empty object that we can use to
       // determine if the request was a success or failure
       .catch(err => {
@@ -44,4 +45,11 @@ export const login = (app, {email, password}) => {
 export const logout = app => {
   // all we need to do is return the promise from app.logout
   return app.logout().then(data => data);
+};
+
+export const authUser = app => {
+  return app
+    .authenticate({storage: window.localStorage, strategy: 'local'})
+    .then(data => data)
+    .catch(err => err);
 };

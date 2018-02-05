@@ -1,3 +1,13 @@
+export const USER_AUTH_REQUEST = '@user/AUTH_REQUEST';
+export const authUserRequest = () => ({
+  type: USER_AUTH_REQUEST,
+});
+
+export const USER_AUTH_SUCCESS = '@user/AUTH_SUCCESS';
+export const authUserSuccess = () => ({
+  type: USER_AUTH_SUCCESS,
+});
+
 export const USER_ADD_REQUEST = '@user/ADD_REQUEST';
 export const addUser = ({email, password}) => ({
   type: USER_ADD_REQUEST,
