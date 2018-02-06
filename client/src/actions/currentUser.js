@@ -3,9 +3,17 @@ export const authUserRequest = () => ({
   type: USER_AUTH_REQUEST,
 });
 
+// dispatched when we get a response with a user
 export const USER_AUTH_SUCCESS = '@user/AUTH_SUCCESS';
-export const authUserSuccess = () => ({
+export const authUserSuccess = currentUser => ({
   type: USER_AUTH_SUCCESS,
+  currentUser,
+});
+
+// dispatched when auth is rejected
+export const USER_AUTH_FAIL = '@user/AUTH_FAIL';
+export const authUserFail = () => ({
+  type: USER_AUTH_FAIL,
 });
 
 export const USER_ADD_REQUEST = '@user/ADD_REQUEST';
