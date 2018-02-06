@@ -91,13 +91,27 @@ export const logoutUserSaga = function* logoutUserSaga(feathersApp) {
   yield takeLatest(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
 };
 
+// auth request handler, called by
 const authUserRequest = function* authUserRequest(feathersApp) {
-  const response = yield call(userService.authUser, feathersApp);
+  // wrap the request in a try block
+  try {
+    // request authentication
+    const response = yield call(userService.authUser, feathersApp);
 
-  debugger;
-  yield put(actions.authUserSuccess(), {currentUser: response});
+    // when that's done, dispatch the response to authUserSuccess so we can
+    // add the user to state
+    yield put(actions.authUserSuccess(response));
+  } catch (e) {
+    // otherwise indicate the auth failed
+    yield put(actions.authUserFail());
+  }
 };
 
+// watch for USER_AUTH_REQUEST being dispatched
+// We can name it so to make it more obvious. Our other watchers should be udpated
+// accordingly
 export const watchUserAuth = function* authUserSaga(feathersApp) {
+  // We use takeLatest, because we only want this dispatched one at a time
+  // We specify authUserRequest as the handler for this action being dispatched
   yield takeLatest(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
 };
