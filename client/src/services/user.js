@@ -47,9 +47,14 @@ export const logout = app => {
   return app.logout().then(data => data);
 };
 
+// authenticate the user only using jwt, as configured in our store
 export const authUser = app => {
-  return app
-    .authenticate({storage: window.localStorage, strategy: 'local'})
-    .then(data => data)
-    .catch(err => err);
+  return (
+    app
+      // don't specify any options here - authenticate() without any arguments
+      // will auth the user using localStorage if the feathers-jwt token is present
+      .authenticate()
+      .then(data => data)
+      .catch(err => err)
+  );
 };
