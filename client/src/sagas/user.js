@@ -1,5 +1,4 @@
-import {takeEvery} from 'redux-saga';
-import {call, put} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 
 import {history} from '../store';
 
@@ -39,7 +38,7 @@ export const addUserSaga = function* addUserSaga(feathersApp) {
   // It will yield each object returned to it.
   // So in addUser, we have multiple yields. We need this generator to yield
   // everything that the other generator yields.
-  yield* takeEvery(actions.USER_ADD_REQUEST, addUser, feathersApp);
+  yield takeLatest(actions.USER_ADD_REQUEST, addUser, feathersApp);
 };
 
 // attempt to log a user in. This is the handler for our loginSaga
@@ -70,7 +69,7 @@ export const loginUserSaga = function* loginUserSaga(feathersApp) {
   // that is subscribed to USER_LOGIN_REQUEST
   // The tryLogin handler is fired after this, which receives the data from the
   // originally dispatched action
-  yield* takeEvery(actions.USER_LOGIN_REQUEST, tryLogin, feathersApp);
+  yield takeLatest(actions.USER_LOGIN_REQUEST, tryLogin, feathersApp);
 };
 
 // create handler for our logoutSaga
@@ -89,7 +88,7 @@ const requestLogout = function* requestLogout(feathersApp) {
 export const logoutUserSaga = function* logoutUserSaga(feathersApp) {
   // and it fires its requestLogout handler, passing in our app, and whatever the
   // action was dispatched with, if anything
-  yield* takeEvery(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
+  yield takeLatest(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
 };
 
 const authUserRequest = function* authUserRequest(feathersApp) {
@@ -99,7 +98,6 @@ const authUserRequest = function* authUserRequest(feathersApp) {
   yield put(actions.authUserSuccess(), {currentUser: response});
 };
 
-export const authUserSaga = function* authUserSaga(feathersApp) {
-  yield* takeEvery(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
 export const watchUserAuth = function* authUserSaga(feathersApp) {
+  yield takeLatest(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
 };
