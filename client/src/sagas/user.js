@@ -101,4 +101,5 @@ const authUserRequest = function* authUserRequest(feathersApp) {
 
 export const authUserSaga = function* authUserSaga(feathersApp) {
   yield* takeEvery(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
+export const watchUserAuth = function* authUserSaga(feathersApp) {
 };
