@@ -43,7 +43,7 @@ export const addUserSaga = function* addUserSaga(feathersApp) {
 
 // attempt to log a user in. This is the handler for our loginSaga
 // This handler receives the data in the dispatched action on the log in form
-const tryLogin = function* tryLogin(feathersApp, {email, password}) {
+const tryLogin = function* tryLogin(feathersApp, {email, password, nextRoute}) {
   // we store the user we get in the response from making a request against
   // our API
   const response = yield call(userService.login, feathersApp, {
@@ -56,8 +56,8 @@ const tryLogin = function* tryLogin(feathersApp, {email, password}) {
     // dispatch the loginSuccess action, sending through the user data returned
     yield put(actions.loginSuccess({currentUser: response}));
 
-    // and then redirect the user to the home
-    yield history.push(routes.home);
+    // and then redirect the user to the previous URL or home
+    history.push(nextRoute ? nextRoute : routes.home);
   } else {
     // otherwise dispatch loginFailure
     yield put(actions.loginFailure());
