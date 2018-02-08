@@ -1,5 +1,4 @@
-import {takeEvery} from 'redux-saga';
-import {call, put} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 
 import {history} from '../store';
 
@@ -39,12 +38,12 @@ export const addUserSaga = function* addUserSaga(feathersApp) {
   // It will yield each object returned to it.
   // So in addUser, we have multiple yields. We need this generator to yield
   // everything that the other generator yields.
-  yield* takeEvery(actions.USER_ADD_REQUEST, addUser, feathersApp);
+  yield takeLatest(actions.USER_ADD_REQUEST, addUser, feathersApp);
 };
 
 // attempt to log a user in. This is the handler for our loginSaga
 // This handler receives the data in the dispatched action on the log in form
-const tryLogin = function* tryLogin(feathersApp, {email, password}) {
+const tryLogin = function* tryLogin(feathersApp, {email, password, nextRoute}) {
   // we store the user we get in the response from making a request against
   // our API
   const response = yield call(userService.login, feathersApp, {
@@ -57,8 +56,8 @@ const tryLogin = function* tryLogin(feathersApp, {email, password}) {
     // dispatch the loginSuccess action, sending through the user data returned
     yield put(actions.loginSuccess({currentUser: response}));
 
-    // and then redirect the user to the home
-    yield history.push(routes.home);
+    // and then redirect the user to the previous URL or home
+    history.push(nextRoute ? nextRoute : routes.home);
   } else {
     // otherwise dispatch loginFailure
     yield put(actions.loginFailure());
@@ -70,7 +69,7 @@ export const loginUserSaga = function* loginUserSaga(feathersApp) {
   // that is subscribed to USER_LOGIN_REQUEST
   // The tryLogin handler is fired after this, which receives the data from the
   // originally dispatched action
-  yield* takeEvery(actions.USER_LOGIN_REQUEST, tryLogin, feathersApp);
+  yield takeLatest(actions.USER_LOGIN_REQUEST, tryLogin, feathersApp);
 };
 
 // create handler for our logoutSaga
@@ -89,5 +88,30 @@ const requestLogout = function* requestLogout(feathersApp) {
 export const logoutUserSaga = function* logoutUserSaga(feathersApp) {
   // and it fires its requestLogout handler, passing in our app, and whatever the
   // action was dispatched with, if anything
-  yield* takeEvery(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
+  yield takeLatest(actions.USER_LOGOUT_REQUEST, requestLogout, feathersApp);
+};
+
+// auth request handler, called by
+const authUserRequest = function* authUserRequest(feathersApp) {
+  // wrap the request in a try block
+  try {
+    // request authentication
+    const response = yield call(userService.authUser, feathersApp);
+
+    // when that's done, dispatch the response to authUserSuccess so we can
+    // add the user to state
+    yield put(actions.authUserSuccess(response));
+  } catch (e) {
+    // otherwise indicate the auth failed
+    yield put(actions.authUserFail());
+  }
+};
+
+// watch for USER_AUTH_REQUEST being dispatched
+// We can name it so to make it more obvious. Our other watchers should be udpated
+// accordingly
+export const watchUserAuth = function* authUserSaga(feathersApp) {
+  // We use takeLatest, because we only want this dispatched one at a time
+  // We specify authUserRequest as the handler for this action being dispatched
+  yield takeLatest(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
 };

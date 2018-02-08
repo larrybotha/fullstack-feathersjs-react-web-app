@@ -29,6 +29,7 @@ export const login = (app, {email, password}) => {
       .then(data => {
         return data;
       })
+
       // if it is rejected, send back an empty object that we can use to
       // determine if the request was a success or failure
       .catch(err => {
@@ -44,4 +45,16 @@ export const login = (app, {email, password}) => {
 export const logout = app => {
   // all we need to do is return the promise from app.logout
   return app.logout().then(data => data);
+};
+
+// authenticate the user only using jwt, as configured in our store
+export const authUser = app => {
+  return (
+    app
+      // don't specify any options here - authenticate() without any arguments
+      // will auth the user using localStorage if the feathers-jwt token is present
+      .authenticate()
+      .then(data => data)
+      .catch(err => err)
+  );
 };

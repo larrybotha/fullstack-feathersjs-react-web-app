@@ -20,5 +20,8 @@
   "dependencies": {
     "feathers-nedb": "^3.0.0",
     "nedb": "^1.8.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.10.2"
   }
 }

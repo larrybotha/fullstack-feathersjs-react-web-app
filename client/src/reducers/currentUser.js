@@ -4,6 +4,7 @@ const initialState = {};
 
 const currentUserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.USER_AUTH_SUCCESS:
     case actions.USER_LOGIN_SUCCESS:
       return {...state, ...action.currentUser};
 

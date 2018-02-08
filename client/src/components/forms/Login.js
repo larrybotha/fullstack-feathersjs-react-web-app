@@ -19,13 +19,18 @@ class LoginForm extends Component {
   };
 
   handleSubmit = e => {
-    const {login} = this.props;
+    const {location, login} = this.props;
     const {email, password} = this.state;
+    // get the params to see if there are any query params
+    const params = new URLSearchParams(location.search);
     e.preventDefault();
 
     login({
       email,
       password,
+      // send through the nextRoute so that when a user is logged in they are
+      // redirected to where they previously were
+      nextRoute: params.get('next'),
     });
   };
 
