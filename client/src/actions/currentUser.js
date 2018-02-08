@@ -34,10 +34,11 @@ export const USER_LOGIN_REQUEST = '@user/LOGIN_REQUEST';
 // The data passed in here comes from the action dispatched via the form.
 // In users saga we subscribe to this action, and fire the request against
 // the API from there
-export const login = ({email, password}) => ({
+export const login = ({email, password, nextRoute}) => ({
   type: USER_LOGIN_REQUEST,
   email,
   password,
+  nextRoute,
 });
 
 // If the API request fired from the saga succeeds, we pass the current user
