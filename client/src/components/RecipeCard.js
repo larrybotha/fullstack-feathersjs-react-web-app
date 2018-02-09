@@ -14,7 +14,7 @@ const RecipeCard = ({recipe}) => (
       <Card.Meta>Description</Card.Meta>
       <Card.Description>{recipe.description}</Card.Description>
 
-      <div>{recipe.ingredients.join(', ')}</div>
+      {recipe.ingredients ? <div>{recipe.ingredients.join(', ')}</div> : null}
 
       <Link to={`/recipes/${recipe._id}`}>view recipe</Link>
     </Card.Content>
