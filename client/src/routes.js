@@ -3,7 +3,7 @@ const routes = {
 
   recipes: '/recipes',
   recipesAdd: '/recipes/add',
-  recipeItem: '/reipces/:id',
+  recipeItem: '/recipes/:id',
 
   login: '/login',
   signup: '/signup',

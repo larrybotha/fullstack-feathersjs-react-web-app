@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path={routes.home} component={Home} />
           <Redirect exact from={routes.recipes} to={routes.home} />
           <Route exact path={routes.recipesAdd} component={RecipesAdd} />
-          <Route exact path={routes.recipeItem} component={SingleRecipe} />
+          <Route path={routes.recipeItem} component={SingleRecipe} />
           <Route exact path={routes.signup} component={Signup} />
           <Route exact path={routes.login} component={Login} />
         </Switch>
