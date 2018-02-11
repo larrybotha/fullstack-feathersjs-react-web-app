@@ -1,5 +1,5 @@
 import 'preact/devtools';
-import {h, Component} from 'preact';
+import {h} from 'preact';
 
 import AppProvider from './components/Provider';
 

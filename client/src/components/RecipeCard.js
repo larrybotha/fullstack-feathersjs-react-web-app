@@ -2,6 +2,8 @@ import {h} from 'preact';
 import {Link} from 'react-router-dom';
 import {Card, Image} from 'semantic-ui-react';
 
+import routes from '../routes';
+
 const RecipeCard = ({recipe}) => (
   <Card centered>
     <Card.Content>
@@ -14,9 +16,11 @@ const RecipeCard = ({recipe}) => (
       <Card.Meta>Description</Card.Meta>
       <Card.Description>{recipe.description}</Card.Description>
 
-      <div>{recipe.ingredients.join(', ')}</div>
+      {recipe.ingredients ? <div>{recipe.ingredients.join(', ')}</div> : null}
 
-      <Link to={`/recipes/${recipe._id}`}>view recipe</Link>
+      <Link to={`${routes.recipeItem.replace(/:id/, recipe._id)}`}>
+        view recipe
+      </Link>
     </Card.Content>
   </Card>
 );
