@@ -1,7 +1,12 @@
 import {takeEvery} from 'redux-saga';
 import {call, put} from 'redux-saga/effects';
 
-import {createRecipe, getRecipe, getRecentRecipes} from '../services/recipes';
+import {
+  createRecipe,
+  getRecipe,
+  getRecipesByUserId,
+  getRecentRecipes,
+} from '../services/recipes';
 import * as actions from '../actions/recipes';
 
 import {history} from '../store';
@@ -99,4 +104,20 @@ export const fetchRecipeSaga = function* fetchRecipeSaga(feathersApp) {
   // listen for anyone dispatching the FETCH_RECIPE action, and trigger
   // fetchRecipe when that happens
   yield* takeEvery(actions.FETCH_RECIPE, fetchRecipe, feathersApp);
+};
+
+const findUserRecipes = function* findUserRecipes(feathersApp, {userId}) {
+  const recipes = yield call(getRecipesByUserId, feathersApp, userId);
+
+  yield put(actions.recipesByUserIdSuccess(recipes));
+};
+
+export const watchRequestRecipesById = function* watchRequestRecipesById(
+  feathersApp
+) {
+  yield* takeEvery(
+    actions.REQUEST_RECIPES_BY_USER_ID,
+    findUserRecipes,
+    feathersApp
+  );
 };
