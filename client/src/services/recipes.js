@@ -1,4 +1,4 @@
-export const getRecipesByUserId = (aap, userId) => {
+export const findRecipesByUserId = (app, userId) => {
   const recipes = app.service('recipes');
 
   return recipes

@@ -14,8 +14,8 @@ function* root(feathersApp) {
     fork(recipesSagas.recentRecipesSaga, feathersApp),
     fork(recipesSagas.addRecipeSaga, feathersApp),
     fork(recipesSagas.fetchRecipeSaga, feathersApp),
-    fork(recipesSagas.watchRequestRecipesById, feathersApp),
 
+    fork(userSagas.watchRequestUserRecipes, feathersApp),
     fork(userSagas.addUserSaga, feathersApp),
     fork(userSagas.loginUserSaga, feathersApp),
     fork(userSagas.logoutUserSaga, feathersApp),
