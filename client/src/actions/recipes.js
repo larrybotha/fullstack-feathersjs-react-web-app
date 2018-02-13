@@ -1,18 +1,3 @@
-export const REQUEST_RECIPES_BY_USER_ID = '@recipes/REQUEST_RECIPES_BY_USER_ID';
-// action to initiate a request
-export const requestRecipesByUserId = userId => ({
-  type: REQUEST_RECIPES_BY_USER_ID,
-  userId,
-});
-
-// when we have a success response after requesting recipes.
-// This action is dispatched inside the recipes saga on a successful response
-export const RECIPES_BY_USER_ID_SUCCESS = '@recipes/RECIPES_BY_USER_ID_SUCCESS';
-export const recipesByUserIdSuccess = recipes => ({
-  type: RECIPES_BY_USER_ID_SUCCESS,
-  recipes,
-});
-
 export const RECENT_RECIPES_REQUEST = '@recipes/RECENT_RECIPES_REQUEST';
 // action to initiate a request
 export const requestRecentRecipes = () => ({

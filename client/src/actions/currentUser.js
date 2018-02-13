@@ -64,3 +64,17 @@ export const USER_LOGOUT_SUCCESS = '@user/LOGOUT_SUCCESS';
 export const logoutSuccess = () => ({
   type: USER_LOGOUT_SUCCESS,
 });
+
+export const REQUEST_USER_RECIPES = '@recipes/REQUEST_USER_RECIPES';
+export const requestUserRecipes = userId => ({
+  type: REQUEST_USER_RECIPES,
+  userId,
+});
+
+// when we have a success response after requesting recipes.
+// This action is dispatched inside the recipes saga on a successful response
+export const USER_RECIPES_SUCCESS = '@recipes/USER_RECIPES_SUCCESS';
+export const userRecipesSuccess = recipes => ({
+  type: USER_RECIPES_SUCCESS,
+  recipes,
+});
