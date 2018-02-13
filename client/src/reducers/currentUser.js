@@ -1,6 +1,8 @@
 import * as actions from '../actions/currentUser';
 
-const initialState = {};
+const initialState = {
+  recipes: [],
+};
 
 const currentUserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +10,8 @@ const currentUserReducer = (state = initialState, action) => {
     case actions.USER_LOGIN_SUCCESS:
       return {...state, ...action.currentUser};
 
+    case actions.USER_RECIPES_SUCCESS:
+      return {...state, recipes: action.recipes};
     case actions.USER_LOGOUT_SUCCESS:
       return initialState;
 

@@ -1,3 +1,15 @@
+export const findRecipesByUserId = (app, userId) => {
+  const recipes = app.service('recipes');
+
+  return recipes
+    .find({
+      query: {
+        userId,
+      },
+    })
+    .then((data, err) => data.data);
+};
+
 // This function ties our UI to our API.
 // When a RECENT_RECIPES_REQUEST action is dispatched, we have a recipes saga that
 // handles that, and executes this function.

@@ -1,9 +1,10 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 
 import {history} from '../store';
 
 import * as actions from '../actions/currentUser';
 import * as userService from '../services/user';
+import * as recipesService from '../services/recipes';
 
 import routes from '../routes';
 
@@ -114,4 +115,23 @@ export const watchUserAuth = function* authUserSaga(feathersApp) {
   // We use takeLatest, because we only want this dispatched one at a time
   // We specify authUserRequest as the handler for this action being dispatched
   yield takeLatest(actions.USER_AUTH_REQUEST, authUserRequest, feathersApp);
+};
+
+const findUserRecipes = function* findUserRecipes(feathersApp, {userId}) {
+  try {
+    const recipes = yield call(
+      recipesService.findRecipesByUserId,
+      feathersApp,
+      userId
+    );
+    yield put(actions.userRecipesSuccess(recipes));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const watchRequestUserRecipes = function* watchRequestUserRecipes(
+  feathersApp
+) {
+  yield takeLatest(actions.REQUEST_USER_RECIPES, findUserRecipes, feathersApp);
 };

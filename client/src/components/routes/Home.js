@@ -1,17 +1,33 @@
-import {h} from 'preact';
+import {h, Component} from 'preact';
+import {connect} from 'react-redux';
 
 import Main from '../Main';
 import RecipeList from '../RecipeList';
 
-const Home = () => (
-  <Main
-    render={({requestRecentRecipes, recipes}) => (
-      <RecipeList
-        requestRecentRecipes={requestRecentRecipes}
-        recipes={recipes}
-      />
-    )}
-  />
-);
+import {requestRecentRecipes} from '../../actions/recipes';
 
-export default Home;
+class Home extends Component {
+  componentWillMount() {
+    const {requestRecentRecipes} = this.props;
+
+    requestRecentRecipes();
+  }
+
+  render() {
+    const {recipes} = this.props;
+
+    return <Main render={() => <RecipeList recipes={recipes} />} />;
+  }
+}
+
+export {Home};
+
+const mapStateToProps = ({recipes}) => {
+  return {
+    recipes: recipes.items,
+  };
+};
+
+const mapDispatchToProps = {requestRecentRecipes};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
