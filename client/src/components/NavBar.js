@@ -26,7 +26,9 @@ class NavBar extends Component {
 
         {isLoggedIn ? (
           <Menu.Menu>
-            <Menu.Item>{userEmail}</Menu.Item>
+            <Menu.Item>
+              <NavLink to={routes.profile}>{userEmail}</NavLink>
+            </Menu.Item>
 
             <Menu.Item name="Log out" onClick={logout}>
               Log out

@@ -9,6 +9,7 @@ import RecipesAdd from './routes/RecipesAdd';
 import SingleRecipe from './routes/SingleRecipe';
 import Signup from './routes/Signup';
 import Login from './routes/Login';
+import Profile from './routes/Profile';
 
 import {authUserRequest} from '../actions/currentUser';
 
@@ -29,6 +30,7 @@ class App extends Component {
           <Redirect exact from={routes.recipes} to={routes.home} />
           <Route exact path={routes.recipesAdd} component={RecipesAdd} />
           <Route path={routes.recipeItem} component={SingleRecipe} />
+          <Route exact path={routes.profile} component={Profile} />
           <Route exact path={routes.signup} component={Signup} />
           <Route exact path={routes.login} component={Login} />
         </Switch>
